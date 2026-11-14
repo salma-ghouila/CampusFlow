@@ -1,1 +1,158 @@
-/* You can add global styles to this file, and also import other style files */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: 'Segoe UI', system-ui, sans-serif;
+  background: #f5f6fa;
+  color: #111827;
+}
+
+h1 {
+  font-size: 1.7rem;
+}
+
+input:focus,
+select:focus {
+  outline: 2px solid #c7d2fe;
+  border-color: #4f46e5;
+}
+
+.error {
+  color: #dc2626;
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* ───── Connexion / Inscription (écran divisé) ───── */
+.auth-split {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.auth-brand {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 2.5rem 3rem;
+  color: #fff;
+  background: linear-gradient(145deg, #1e1b4b, #4f46e5);
+}
+
+.brand-logo {
+  color: #fff;
+  font-weight: 800;
+  font-size: 1.3rem;
+  text-decoration: none;
+}
+
+.brand-body h2 {
+  font-size: 2.3rem;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+
+.brand-body p {
+  color: #c7d2fe;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  max-width: 440px;
+}
+
+.brand-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.auth-brand small {
+  color: #a5b4fc;
+}
+
+.auth-side {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.auth-form {
+  width: 100%;
+  max-width: 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 0.45rem;
+}
+
+.auth-form h1 {
+  margin: 0;
+  font-size: 1.8rem;
+}
+
+.auth-form .lead {
+  color: #6b7280;
+  margin: 0.2rem 0 1.2rem;
+}
+
+.auth-form label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #374151;
+  margin-top: 0.4rem;
+}
+
+.auth-form input {
+  padding: 0.8rem;
+  border: 1px solid #d1d5db;
+  border-radius: 10px;
+  font: inherit;
+}
+
+.auth-form button {
+  margin-top: 1rem;
+  padding: 0.85rem;
+  border: none;
+  border-radius: 10px;
+  background: #4f46e5;
+  color: #fff;
+  font: inherit;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.auth-form button:hover:not(:disabled) {
+  background: #4338ca;
+}
+
+.auth-form button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.auth-form .alt {
+  font-size: 0.9rem;
+  text-align: center;
+  color: #6b7280;
+  margin: 0.4rem 0 0;
+}
+
+.auth-form a {
+  color: #4f46e5;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+@media (max-width: 800px) {
+  .auth-split {
+    grid-template-columns: 1fr;
+  }
+  .auth-brand {
+    display: none;
+  }
+}

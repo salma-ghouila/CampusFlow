@@ -1,8 +1,34 @@
-﻿node_modules
-dist
+﻿# Dépendances et builds
+node_modules/
+dist/
+build/
+.angular/
+.nest/
+coverage/
+
+# Fichiers sensibles
 .env
-.angular
-coverage
+.env.*
+!.env.example
+
+# Client Prisma généré
+backend/src/generated/
+
+# Logs et caches
+*.log
+*.tsbuildinfo
+.cache/
+tmp/
+
+# Éditeurs et outils IA
+.idea/
+.vscode/
 .DS_Store
-.idea
-.vscode
+.agents/
+.claude/
+.cursor/
+.devin/
+
+# Données
+pgdata/
+uploads/
