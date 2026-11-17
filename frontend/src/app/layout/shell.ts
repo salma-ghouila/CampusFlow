@@ -20,6 +20,11 @@ import { AuthService } from '../core/auth.service';
           <a routerLink="/profile" routerLinkActive="active">
             <span class="ico">👤</span> Mon profil
           </a>
+          @if (auth.isAdmin()) {
+            <a routerLink="/admin" routerLinkActive="active">
+              <span class="ico">🛡️</span> Administration
+            </a>
+          }
         </nav>
 
         <div class="user">
