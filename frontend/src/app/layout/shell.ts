@@ -26,6 +26,9 @@ import { AuthService } from '../core/auth.service';
           <a routerLink="/groups" routerLinkActive="active">
             <span class="ico">👥</span> Groupes d'étude
           </a>
+          <a routerLink="/progress" routerLinkActive="active">
+            <span class="ico">📈</span> Progression
+          </a>
           
       
           <a routerLink="/profile" routerLinkActive="active">
