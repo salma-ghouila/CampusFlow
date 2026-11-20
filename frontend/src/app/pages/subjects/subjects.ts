@@ -2,9 +2,11 @@ import { Component, computed, inject, signal } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { ProgressService } from '../../core/progress.service';
 import { Subject, SubjectsService } from '../../core/subjects.service';
+import { ProgressBar } from '../../shared/components/progress-bar';
 
 @Component({
   selector: 'app-subjects',
+  imports: [ProgressBar],
   template: `
     <header class="head">
       <div>
@@ -40,7 +42,7 @@ import { Subject, SubjectsService } from '../../core/subjects.service';
             <strong>Progression globale</strong>
             <span>{{ globalAverage() }} %</span>
           </div>
-          <div class="bar"><div class="fill" [style.width.%]="globalAverage()"></div></div>
+          <app-progress-bar [value]="globalAverage()" label="Progression globale" />
         </section>
 
         <div class="grid">
@@ -53,7 +55,7 @@ import { Subject, SubjectsService } from '../../core/subjects.service';
                   <button class="icon-btn" title="Supprimer la matière" (click)="removeSubject(subject)">🗑️</button>
                 </div>
               </div>
-              <div class="bar small"><div class="fill" [style.width.%]="subjectAverage(subject)"></div></div>
+              <app-progress-bar size="small" [value]="subjectAverage(subject)" [label]="'Progression ' + subject.name" />
 
               <ul>
                 @for (chapter of subject.chapters; track chapter.id) {
