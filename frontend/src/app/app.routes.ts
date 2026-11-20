@@ -8,6 +8,7 @@ import { Login } from './pages/login/login';
 import { Profile } from './pages/profile/profile';
 import { Register } from './pages/register/register';
 import { Subjects } from './pages/subjects/subjects';
+import { Library } from './pages/library/library';
 
 export const routes: Routes = [
   { path: '', component: Landing, pathMatch: 'full' },
@@ -22,6 +23,7 @@ export const routes: Routes = [
       { path: 'subjects', component: Subjects },
       { path: 'profile', component: Profile },
       { path: 'admin', component: Admin, canActivate: [adminGuard] },
+      { path: 'library', component: Library },
     ],
   },
   { path: '**', redirectTo: '' },
