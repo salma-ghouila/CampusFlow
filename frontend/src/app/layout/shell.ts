@@ -32,7 +32,9 @@ import { AuthService } from '../core/auth.service';
           <a routerLink="/assistant" routerLinkActive="active">
             <span class="ico">✦</span> Assistant IA
           </a>
-          
+          <a routerLink="/quiz" routerLinkActive="active">
+            <span class="ico">🎯</span> Quiz
+          </a>
       
           <a routerLink="/profile" routerLinkActive="active">
             <span class="ico">👤</span> Mon profil
