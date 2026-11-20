@@ -17,8 +17,11 @@ import { AuthService } from '../core/auth.service';
           <a routerLink="/subjects" routerLinkActive="active">
             <span class="ico">📚</span> Matières
           </a>
-                    <a routerLink="/library" routerLinkActive="active">
+          <a routerLink="/library" routerLinkActive="active">
             <span class="ico">🗂️</span> Bibliothèque
+          </a>
+          <a routerLink="/planning" routerLinkActive="active">
+            <span class="ico">📅</span> Planning
           </a>
           
       
