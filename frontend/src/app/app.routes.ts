@@ -12,6 +12,7 @@ import { Library } from './pages/library/library';
 import { Planning } from './pages/planning/planning';
 import { Groups } from './pages/groups/groups';
 import { Progress } from './pages/progress/progress';
+import { Assistant } from './pages/assistant/assistant';
 
 export const routes: Routes = [
   { path: '', component: Landing, pathMatch: 'full' },
@@ -30,6 +31,7 @@ export const routes: Routes = [
       { path: 'planning', component: Planning },
       { path: 'groups', component: Groups },
       { path: 'progress', component: Progress },
+      { path: 'assistant', component: Assistant },
     ],
   },
   { path: '**', redirectTo: '' },

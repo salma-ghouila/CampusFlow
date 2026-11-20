@@ -29,6 +29,9 @@ import { AuthService } from '../core/auth.service';
           <a routerLink="/progress" routerLinkActive="active">
             <span class="ico">📈</span> Progression
           </a>
+          <a routerLink="/assistant" routerLinkActive="active">
+            <span class="ico">✦</span> Assistant IA
+          </a>
           
       
           <a routerLink="/profile" routerLinkActive="active">
