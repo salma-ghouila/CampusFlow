@@ -72,7 +72,28 @@ export const routes: Routes = [
       {
         path: 'admin',
         canActivate: [adminGuard],
-        loadComponent: () => import('./pages/admin/admin').then((m) => m.Admin),
+        loadComponent: () => import('./pages/admin-area/admin-area').then((m) => m.AdminArea),
+        children: [
+          {
+            path: '',
+            loadComponent: () =>
+              import('./pages/admin/admin-dashboard').then((m) => m.AdminDashboard),
+          },
+          {
+            path: 'users',
+            loadComponent: () => import('./pages/admin/admin-users').then((m) => m.AdminUsers),
+          },
+          {
+            path: 'moderation',
+            loadComponent: () =>
+              import('./pages/admin/admin-moderation').then((m) => m.AdminModeration),
+          },
+          {
+            path: 'ai-config',
+            loadComponent: () =>
+              import('./pages/admin/admin-ai-config').then((m) => m.AdminAiConfig),
+          },
+        ],
       },
     ],
   },
