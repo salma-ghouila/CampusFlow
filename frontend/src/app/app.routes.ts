@@ -1,40 +1,41 @@
 import { Routes } from '@angular/router';
 import { adminGuard, authGuard } from './core/auth.guard';
 import { Shell } from './layout/shell';
-import { Admin } from './pages/admin/admin';
-import { Home } from './pages/home/home';
-import { Landing } from './pages/landing/landing';
-import { Login } from './pages/login/login';
-import { Profile } from './pages/profile/profile';
-import { Register } from './pages/register/register';
-import { Subjects } from './pages/subjects/subjects';
-import { Library } from './pages/library/library';
-import { Planning } from './pages/planning/planning';
-import { Groups } from './pages/groups/groups';
-import { Progress } from './pages/progress/progress';
-import { Assistant } from './pages/assistant/assistant';
-import { Quiz } from './pages/quiz/quiz';
 
+/**
+ * Routes de l'application.
+ * Les pages sont chargées à la demande (lazy loading) avec loadComponent :
+ * le navigateur ne télécharge une page que lorsqu'on la visite.
+ */
 export const routes: Routes = [
-  { path: '', component: Landing, pathMatch: 'full' },
-  { path: 'login', component: Login },
-  { path: 'register', component: Register },
+  // Zone publique
+  { path: '', pathMatch: 'full', loadComponent: () => import('./pages/landing/landing').then((m) => m.Landing) },
+  { path: 'login', loadComponent: () => import('./pages/login/login').then((m) => m.Login) },
+  { path: 'register', loadComponent: () => import('./pages/register/register').then((m) => m.Register) },
+
+  // Zone étudiant (connexion obligatoire)
   {
     path: '',
     component: Shell,
     canActivate: [authGuard],
     children: [
-      { path: 'dashboard', component: Home },
-      { path: 'subjects', component: Subjects },
-      { path: 'profile', component: Profile },
-      { path: 'admin', component: Admin, canActivate: [adminGuard] },
-      { path: 'library', component: Library },
-      { path: 'planning', component: Planning },
-      { path: 'groups', component: Groups },
-      { path: 'progress', component: Progress },
-      { path: 'assistant', component: Assistant },
-      { path: 'quiz', component: Quiz },
+      { path: 'dashboard', loadComponent: () => import('./pages/home/home').then((m) => m.Home) },
+      { path: 'subjects', loadComponent: () => import('./pages/subjects/subjects').then((m) => m.Subjects) },
+      { path: 'library', loadComponent: () => import('./pages/library/library').then((m) => m.Library) },
+      { path: 'planning', loadComponent: () => import('./pages/planning/planning').then((m) => m.Planning) },
+      { path: 'groups', loadComponent: () => import('./pages/groups/groups').then((m) => m.Groups) },
+      { path: 'progress', loadComponent: () => import('./pages/progress/progress').then((m) => m.Progress) },
+      { path: 'assistant', loadComponent: () => import('./pages/assistant/assistant').then((m) => m.Assistant) },
+      { path: 'quiz', loadComponent: () => import('./pages/quiz/quiz').then((m) => m.Quiz) },
+      { path: 'profile', loadComponent: () => import('./pages/profile/profile').then((m) => m.Profile) },
+      {
+        path: 'admin',
+        canActivate: [adminGuard],
+        loadComponent: () => import('./pages/admin/admin').then((m) => m.Admin),
+      },
     ],
   },
-  { path: '**', redirectTo: '' },
+
+  // Page introuvable
+  { path: '**', loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFound) },
 ];
