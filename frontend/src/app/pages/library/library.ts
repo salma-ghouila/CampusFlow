@@ -1,15 +1,19 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { Resource, ResourcesService } from '../../core/resources.service';
+import { EmptyState } from '../../shared/components/empty-state';
+import { PageHeader } from '../../shared/components/page-header';
+import { Skeleton } from '../../shared/components/skeleton';
 
 type Tab = 'all' | 'favorites' | 'mine';
 
 @Component({
   selector: 'app-library',
+  imports: [PageHeader, Skeleton, EmptyState],
   template: `
-    <header class="head">
-      <h1>Bibliothèque de ressources</h1>
-      <p>Découvre, partage et note les ressources de la communauté.</p>
-    </header>
+    <app-page-header
+     title="Bibliothèque de ressources"
+     subtitle="Découvre, partage et note les ressources de la communauté."
+    />
 
     <section class="upload" aria-label="Déposer une ressource">
       <input
@@ -57,15 +61,15 @@ type Tab = 'all' | 'favorites' | 'mine';
     @if (loading()) {
       <div class="list" aria-busy="true" aria-label="Chargement">
         @for (i of [1, 2, 3, 4]; track i) {
-          <div class="skeleton"></div>
+          <app-skeleton height="96px" />
         }
       </div>
     } @else if (filtered().length === 0) {
-      <div class="empty">
-        <div class="empty-ico">📚</div>
-        <h3>Aucune ressource trouvée</h3>
-        <p>Essaie un autre filtre ou dépose la première ressource.</p>
-      </div>
+      <app-empty-state
+       icon="📚"
+       title="Aucune ressource trouvée"
+       message="Essaie un autre filtre ou dépose la première ressource."
+      />
     } @else {
       <div class="list">
         @for (r of filtered(); track r.id) {
@@ -109,13 +113,7 @@ type Tab = 'all' | 'favorites' | 'mine';
     }
   `,
   styles: `
-    .head h1 {
-      margin: 0;
-    }
-    .head p {
-      color: #6b7280;
-      margin: 0.3rem 0 1.4rem;
-    }
+
     input,
     select {
       padding: 0.7rem 0.9rem;
@@ -257,32 +255,7 @@ type Tab = 'all' | 'favorites' | 'mine';
       cursor: pointer;
       color: #ef4444;
     }
-    .skeleton {
-      height: 96px;
-      border-radius: 14px;
-      background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.2s infinite;
-    }
-    @keyframes shimmer {
-      to {
-        background-position: -200% 0;
-      }
-    }
-    .empty {
-      background: #fff;
-      border: 2px dashed #c7d2fe;
-      border-radius: 16px;
-      padding: 3rem 1rem;
-      text-align: center;
-    }
-    .empty-ico {
-      font-size: 2.8rem;
-    }
-    .empty p {
-      color: #6b7280;
-      margin: 0;
-    }
+    
     .error {
       color: #dc2626;
     }

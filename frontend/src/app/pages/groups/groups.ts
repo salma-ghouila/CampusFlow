@@ -1,15 +1,16 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { Group, GroupsService } from '../../core/groups.service';
+import { EmptyState } from '../../shared/components/empty-state';
+import { PageHeader } from '../../shared/components/page-header';
+import { Skeleton } from '../../shared/components/skeleton';
 
 type Tab = 'all' | 'mine';
 
 @Component({
   selector: 'app-groups',
+  imports: [PageHeader, Skeleton, EmptyState],
   template: `
-    <header class="head">
-      <h1>Groupes d'étude</h1>
-      <p>Révise avec d'autres étudiants.</p>
-    </header>
+    <app-page-header title="Groupes d'étude" subtitle="Révise avec d'autres étudiants." />
 
     <section class="create" aria-label="Créer un groupe">
       <input
@@ -47,15 +48,15 @@ type Tab = 'all' | 'mine';
     @if (loading()) {
       <div class="grid" aria-busy="true" aria-label="Chargement">
         @for (i of [1, 2, 3, 4]; track i) {
-          <div class="skeleton"></div>
+          <app-skeleton height="150px" />
         }
       </div>
     } @else if (filtered().length === 0) {
-      <div class="empty">
-        <div class="empty-ico">👥</div>
-        <h3>Aucun groupe</h3>
-        <p>Crée ton premier groupe ou rejoins-en un.</p>
-      </div>
+      <app-empty-state
+       icon="👥"
+       title="Aucun groupe"
+       message="Crée ton premier groupe ou rejoins-en un."
+      />
     } @else {
       <div class="grid">
         @for (g of filtered(); track g.id) {
@@ -79,13 +80,7 @@ type Tab = 'all' | 'mine';
     }
   `,
   styles: `
-    .head h1 {
-      margin: 0;
-    }
-    .head p {
-      color: #6b7280;
-      margin: 0.3rem 0 1.4rem;
-    }
+    
     input,
     select {
       padding: 0.7rem 0.9rem;
@@ -205,32 +200,7 @@ type Tab = 'all' | 'mine';
     .leave:hover {
       background: #fee2e2;
     }
-    .skeleton {
-      height: 150px;
-      border-radius: 14px;
-      background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.2s infinite;
-    }
-    @keyframes shimmer {
-      to {
-        background-position: -200% 0;
-      }
-    }
-    .empty {
-      background: #fff;
-      border: 2px dashed #c7d2fe;
-      border-radius: 16px;
-      padding: 3rem 1rem;
-      text-align: center;
-    }
-    .empty-ico {
-      font-size: 2.8rem;
-    }
-    .empty p {
-      color: #6b7280;
-      margin: 0;
-    }
+    
     .error {
       color: #dc2626;
     }

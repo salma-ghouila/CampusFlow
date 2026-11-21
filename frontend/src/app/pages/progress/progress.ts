@@ -3,6 +3,10 @@ import { forkJoin } from 'rxjs';
 import { ProgressService } from '../../core/progress.service';
 import { Subject, SubjectsService } from '../../core/subjects.service';
 import { ProgressBar } from '../../shared/components/progress-bar';
+import { EmptyState } from '../../shared/components/empty-state';
+import { PageHeader } from '../../shared/components/page-header';
+import { Skeleton } from '../../shared/components/skeleton';
+import { StatCard } from '../../shared/components/stat-card';
 
 interface Level {
   label: string;
@@ -11,41 +15,32 @@ interface Level {
 
 @Component({
   selector: 'app-progress',
-  imports: [ProgressBar],
+ 
+  imports: [ProgressBar, PageHeader, Skeleton, EmptyState, StatCard],
   template: `
-    <header class="head">
-      <h1>Progression académique</h1>
-      <p>Ta maîtrise par matière et par chapitre.</p>
-    </header>
-
+    <app-page-header
+     title="Progression académique"
+     subtitle="Ta maîtrise par matière et par chapitre."
+    />
     @if (loading()) {
       <div class="stats" aria-busy="true" aria-label="Chargement">
         @for (i of [1, 2, 3]; track i) {
-          <div class="skeleton"></div>
+          <app-skeleton height="90px" />
         }
       </div>
     } @else if (error()) {
       <p class="error" role="alert">{{ error() }}</p>
     } @else if (subjects().length === 0) {
-      <div class="empty">
-        <div class="empty-ico">📈</div>
-        <h3>Pas encore de progression</h3>
-        <p>Ajoute des matières et des chapitres dans « Matières » pour suivre ta maîtrise.</p>
-      </div>
+      <app-empty-state
+       icon="📈"
+       title="Pas encore de progression"
+       message="Ajoute des matières et des chapitres dans « Matières » pour suivre ta maîtrise."
+      />
     } @else {
       <section class="stats">
-        <div class="stat">
-          <small>Progression globale</small>
-          <strong>{{ globalAverage() }} %</strong>
-        </div>
-        <div class="stat">
-          <small>Chapitres maîtrisés</small>
-          <strong>{{ masteredCount() }} / {{ totalChapters() }}</strong>
-        </div>
-        <div class="stat">
-          <small>Matières suivies</small>
-          <strong>{{ subjects().length }}</strong>
-        </div>
+       <app-stat-card label="Progression globale" [value]="globalAverage() + ' %'" />
+       <app-stat-card label="Chapitres maîtrisés" [value]="masteredCount() + ' / ' + totalChapters()" />
+       <app-stat-card label="Matières suivies" [value]="subjects().length" />
       </section>
 
       <div class="layout">
@@ -80,35 +75,14 @@ interface Level {
     }
   `,
   styles: `
-    .head h1 {
-      margin: 0;
-    }
-    .head p {
-      color: #6b7280;
-      margin: 0.3rem 0 1.4rem;
-    }
+    
     .stats {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
       gap: 1rem;
       margin-bottom: 1rem;
     }
-    .stat {
-      background: #fff;
-      padding: 1.1rem 1.2rem;
-      border-radius: 14px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
-    .stat small {
-      color: #6b7280;
-    }
-    .stat strong {
-      font-size: 1.7rem;
-      color: #4f46e5;
-    }
+    
     .layout {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
@@ -166,32 +140,7 @@ interface Level {
       background: #d1fae5;
       color: #047857;
     }
-    .skeleton {
-      height: 90px;
-      border-radius: 14px;
-      background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.2s infinite;
-    }
-    @keyframes shimmer {
-      to {
-        background-position: -200% 0;
-      }
-    }
-    .empty {
-      background: #fff;
-      border: 2px dashed #c7d2fe;
-      border-radius: 16px;
-      padding: 3rem 1rem;
-      text-align: center;
-    }
-    .empty-ico {
-      font-size: 2.8rem;
-    }
-    .empty p {
-      color: #6b7280;
-      margin: 0;
-    }
+    
     .error {
       color: #dc2626;
     }

@@ -1,17 +1,20 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { Question, QuizService } from '../../core/quiz.service';
 import { ProgressBar } from '../../shared/components/progress-bar';
+import { PageHeader } from '../../shared/components/page-header';
+import { Skeleton } from '../../shared/components/skeleton';
+import { StatCard } from '../../shared/components/stat-card';
 
 type Step = 'config' | 'loading' | 'play' | 'result';
 
 @Component({
   selector: 'app-quiz',
-  imports: [ProgressBar],
+  imports: [ProgressBar, PageHeader, Skeleton, StatCard],
   template: `
-    <header class="head">
-      <h1>Quiz personnalisé ✦</h1>
-      <p>Un quiz généré par l'assistant IA, adapté à ton niveau.</p>
-    </header>
+    <app-page-header
+     title="Quiz personnalisé ✦"
+     subtitle="Un quiz généré par l'assistant IA, adapté à ton niveau."
+    />
 
     @switch (step()) {
       @case ('config') {
@@ -45,7 +48,7 @@ type Step = 'config' | 'loading' | 'play' | 'result';
       }
 
       @case ('loading') {
-        <div class="skeleton" aria-busy="true" aria-label="Génération du quiz"></div>
+        <app-skeleton height="260px" />
       }
 
       @case ('play') {
@@ -95,15 +98,9 @@ type Step = 'config' | 'loading' | 'play' | 'result';
 
       @case ('result') {
         <section class="stats">
-          <div class="stat">
-            <small>Score</small><strong>{{ score() }} / {{ questions().length }}</strong>
-          </div>
-          <div class="stat">
-            <small>Sur 20</small><strong>{{ scoreOn20() }}</strong>
-          </div>
-          <div class="stat">
-            <small>Maîtrise du chapitre</small><strong>{{ mastery() }} %</strong>
-          </div>
+         <app-stat-card label="Score" [value]="score() + ' / ' + questions().length" />
+         <app-stat-card label="Sur 20" [value]="scoreOn20()" />
+         <app-stat-card label="Maîtrise du chapitre" [value]="mastery() + ' %'" />
         </section>
 
         <section class="panel" aria-label="Corrections détaillées">
@@ -132,13 +129,7 @@ type Step = 'config' | 'loading' | 'play' | 'result';
     }
   `,
   styles: `
-    .head h1 {
-      margin: 0;
-    }
-    .head p {
-      color: #6b7280;
-      margin: 0.3rem 0 1.4rem;
-    }
+   
     .layout {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
@@ -263,19 +254,7 @@ type Step = 'config' | 'loading' | 'play' | 'result';
       gap: 1rem;
       margin-bottom: 1rem;
     }
-    .stat {
-      background: #fff;
-      padding: 1.1rem 1.2rem;
-      border-radius: 14px;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
-      display: flex;
-      flex-direction: column;
-      gap: 0.2rem;
-    }
-    .stat strong {
-      font-size: 1.7rem;
-      color: #4f46e5;
-    }
+    
     .correction {
       padding: 0.8rem 1rem;
       border-radius: 10px;
@@ -296,18 +275,7 @@ type Step = 'config' | 'loading' | 'play' | 'result';
     .expl {
       color: #6b7280;
     }
-    .skeleton {
-      height: 260px;
-      border-radius: 14px;
-      background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.2s infinite;
-    }
-    @keyframes shimmer {
-      to {
-        background-position: -200% 0;
-      }
-    }
+   
   `,
 })
 export class Quiz {

@@ -1,14 +1,17 @@
 import { Component, computed, inject, signal } from '@angular/core';
 import { forkJoin } from 'rxjs';
 import { Exam, PlanningService, Session } from '../../core/planning.service';
+import { PageHeader } from '../../shared/components/page-header';
+import { Skeleton } from '../../shared/components/skeleton';
 
 @Component({
   selector: 'app-planning',
+  imports: [PageHeader, Skeleton],
   template: `
-    <header class="head">
-      <h1>Planning d'étude</h1>
-      <p>Tes séances manuelles et celles générées par l'assistant IA.</p>
-    </header>
+    <app-page-header
+     title="Planning d'étude"
+     subtitle="Tes séances manuelles et celles générées par l'assistant IA."
+    />
 
     <section class="add" aria-label="Ajouter une séance">
       <input
@@ -38,7 +41,7 @@ import { Exam, PlanningService, Session } from '../../core/planning.service';
     @if (loading()) {
       <div class="week" aria-busy="true" aria-label="Chargement">
         @for (i of [1, 2, 3, 4, 5, 6, 7]; track i) {
-          <div class="skeleton"></div>
+          <app-skeleton height="160px" />
         }
       </div>
     } @else {
@@ -101,13 +104,7 @@ import { Exam, PlanningService, Session } from '../../core/planning.service';
     }
   `,
   styles: `
-    .head h1 {
-      margin: 0;
-    }
-    .head p {
-      color: #6b7280;
-      margin: 0.3rem 0 1.4rem;
-    }
+    
     input,
     select {
       padding: 0.65rem 0.8rem;
@@ -257,18 +254,7 @@ import { Exam, PlanningService, Session } from '../../core/planning.service';
       font-size: 0.9rem;
       margin-top: 1rem;
     }
-    .skeleton {
-      height: 160px;
-      border-radius: 12px;
-      background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
-      background-size: 200% 100%;
-      animation: shimmer 1.2s infinite;
-    }
-    @keyframes shimmer {
-      to {
-        background-position: -200% 0;
-      }
-    }
+    
     .error {
       color: #dc2626;
     }
