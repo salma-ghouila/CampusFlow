@@ -14,10 +14,23 @@ import { Component, input } from '@angular/core';
     </div>
   `,
   styles: `
-    .empty { background: #fff; border: 2px dashed #c7d2fe; border-radius: 16px; padding: 3rem 1rem; text-align: center; }
-    .ico { font-size: 2.8rem; }
-    h3 { margin: 0.5rem 0 0.2rem; }
-    p { color: #6b7280; margin: 0; }
+    .empty {
+      background: #fff;
+      border: 2px dashed #c7d2fe;
+      border-radius: 16px;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+    .ico {
+      font-size: 2.8rem;
+    }
+    h3 {
+      margin: 0.5rem 0 0.2rem;
+    }
+    p {
+      color: #6b7280;
+      margin: 0;
+    }
   `,
 })
 export class EmptyState {

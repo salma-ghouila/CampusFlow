@@ -27,10 +27,28 @@ export interface LegalSection {
     </main>
   `,
   styles: `
-    .wrap { max-width: 760px; margin: 0 auto; padding: 2rem 1.2rem 3rem; }
-    .block { background: #fff; padding: 1.2rem 1.4rem; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); margin-bottom: 0.8rem; }
-    h2 { margin: 0 0 0.4rem; font-size: 1.1rem; color: #1e1b4b; }
-    p { margin: 0; color: #4b5563; line-height: 1.6; }
+    .wrap {
+      max-width: 760px;
+      margin: 0 auto;
+      padding: 2rem 1.2rem 3rem;
+    }
+    .block {
+      background: #fff;
+      padding: 1.2rem 1.4rem;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      margin-bottom: 0.8rem;
+    }
+    h2 {
+      margin: 0 0 0.4rem;
+      font-size: 1.1rem;
+      color: #1e1b4b;
+    }
+    p {
+      margin: 0;
+      color: #4b5563;
+      line-height: 1.6;
+    }
   `,
 })
 export class LegalPage {

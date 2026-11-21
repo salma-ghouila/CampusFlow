@@ -110,9 +110,7 @@ import { ProgressBar } from '../../shared/components/progress-bar';
 
     .global { background: #fff; padding: 1.2rem; border-radius: 14px; margin-bottom: 1.2rem; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
     .global-head { display: flex; justify-content: space-between; margin-bottom: 0.6rem; }
-    .bar { height: 10px; background: #e5e7eb; border-radius: 999px; overflow: hidden; }
-    .bar.small { height: 6px; margin: 0.6rem 0 0.4rem; }
-    .fill { height: 100%; background: linear-gradient(90deg, #4f46e5, #818cf8); transition: width 0.3s; }
+    
 
     .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1rem; align-items: start; }
     .card { background: #fff; padding: 1.2rem; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }

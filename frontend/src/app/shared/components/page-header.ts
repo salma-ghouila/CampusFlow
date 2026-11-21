@@ -15,8 +15,13 @@ import { Component, input } from '@angular/core';
     </header>
   `,
   styles: `
-    h1 { margin: 0; }
-    p { color: #6b7280; margin: 0.3rem 0 1.4rem; }
+    h1 {
+      margin: 0;
+    }
+    p {
+      color: #6b7280;
+      margin: 0.3rem 0 1.4rem;
+    }
   `,
 })
 export class PageHeader {

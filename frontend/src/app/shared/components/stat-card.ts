@@ -13,9 +13,22 @@ import { Component, input } from '@angular/core';
     </div>
   `,
   styles: `
-    .stat { background: #fff; padding: 1.1rem 1.2rem; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); display: flex; flex-direction: column; gap: 0.2rem; }
-    small { color: #6b7280; }
-    strong { font-size: 1.7rem; color: #4f46e5; }
+    .stat {
+      background: #fff;
+      padding: 1.1rem 1.2rem;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    small {
+      color: #6b7280;
+    }
+    strong {
+      font-size: 1.7rem;
+      color: #4f46e5;
+    }
   `,
 })
 export class StatCard {
