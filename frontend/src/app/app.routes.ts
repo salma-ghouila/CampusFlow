@@ -19,6 +19,13 @@ export const routes: Routes = [
     path: 'register',
     loadComponent: () => import('./pages/register/register').then((m) => m.Register),
   },
+  { path: 'faq', loadComponent: () => import('./pages/faq/faq').then((m) => m.Faq) },
+ 
+  { path: 'contact', loadComponent: () => import('./pages/contact/contact').then((m) => m.Contact) },
+ 
+  { path: 'privacy', loadComponent: () => import('./pages/privacy/privacy').then((m) => m.Privacy) },
+ 
+  { path: 'terms', loadComponent: () => import('./pages/terms/terms').then((m) => m.Terms) },
 
   // Zone étudiant (connexion obligatoire)
   {
