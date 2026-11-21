@@ -26,11 +26,51 @@ export interface Exam {
 export class PlanningService {
   private nextId = 6;
   private sessions: Session[] = [
-    { id: 1, title: 'Révision – Arbres', subject: 'Algorithmique', day: 0, time: '09:00', ai: false, done: false },
-    { id: 2, title: 'Quiz personnalisé SQL', subject: 'Bases de données', day: 1, time: '14:00', ai: true, done: false },
-    { id: 3, title: 'Révision Routage', subject: 'Réseaux', day: 2, time: '10:00', ai: true, done: false },
-    { id: 4, title: 'Exercices Maths', subject: 'Mathématiques', day: 3, time: '09:00', ai: false, done: false },
-    { id: 5, title: 'Réunion groupe RS-Team', subject: 'Réseaux', day: 4, time: '17:30', ai: false, done: false },
+    {
+      id: 1,
+      title: 'Révision – Arbres',
+      subject: 'Algorithmique',
+      day: 0,
+      time: '09:00',
+      ai: false,
+      done: false,
+    },
+    {
+      id: 2,
+      title: 'Quiz personnalisé SQL',
+      subject: 'Bases de données',
+      day: 1,
+      time: '14:00',
+      ai: true,
+      done: false,
+    },
+    {
+      id: 3,
+      title: 'Révision Routage',
+      subject: 'Réseaux',
+      day: 2,
+      time: '10:00',
+      ai: true,
+      done: false,
+    },
+    {
+      id: 4,
+      title: 'Exercices Maths',
+      subject: 'Mathématiques',
+      day: 3,
+      time: '09:00',
+      ai: false,
+      done: false,
+    },
+    {
+      id: 5,
+      title: 'Réunion groupe RS-Team',
+      subject: 'Réseaux',
+      day: 4,
+      time: '17:30',
+      ai: false,
+      done: false,
+    },
   ];
   private exams: Exam[] = [
     { id: 1, subject: 'Algorithmique', date: '12 nov', room: 'Salle B12 · 09:00' },
@@ -42,15 +82,29 @@ export class PlanningService {
   }
 
   getSessions(): Observable<Session[]> {
-    return this.reply(this.sessions.map((s) => ({ ...s })), 600);
+    return this.reply(
+      this.sessions.map((s) => ({ ...s })),
+      600,
+    );
   }
 
   getExams(): Observable<Exam[]> {
-    return this.reply(this.exams.map((e) => ({ ...e })), 600);
+    return this.reply(
+      this.exams.map((e) => ({ ...e })),
+      600,
+    );
   }
 
   addSession(title: string, subject: string, day: number, time: string): Observable<Session> {
-    const session: Session = { id: this.nextId++, title, subject, day, time, ai: false, done: false };
+    const session: Session = {
+      id: this.nextId++,
+      title,
+      subject,
+      day,
+      time,
+      ai: false,
+      done: false,
+    };
     this.sessions = [...this.sessions, session];
     return this.reply({ ...session });
   }

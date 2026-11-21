@@ -22,10 +22,50 @@ export interface Resource {
 export class ResourcesService {
   private nextId = 5;
   private data: Resource[] = [
-    { id: 1, title: 'Résumé – Arbres binaires', subject: 'Algorithmique', author: 'Yassine M.', rating: 4.8, votes: 12, downloads: 54, favorite: false, mine: false },
-    { id: 2, title: 'TD corrigé SQL', subject: 'Bases de données', author: 'Amel K.', rating: 4.5, votes: 8, downloads: 31, favorite: true, mine: false },
-    { id: 3, title: 'Fiche modèle OSI', subject: 'Réseaux', author: 'Hatem R.', rating: 4.2, votes: 5, downloads: 22, favorite: false, mine: false },
-    { id: 4, title: 'Annales 2025', subject: 'Mathématiques', author: 'Équipe CampusFlow', rating: 4.9, votes: 20, downloads: 120, favorite: false, mine: false },
+    {
+      id: 1,
+      title: 'Résumé – Arbres binaires',
+      subject: 'Algorithmique',
+      author: 'Yassine M.',
+      rating: 4.8,
+      votes: 12,
+      downloads: 54,
+      favorite: false,
+      mine: false,
+    },
+    {
+      id: 2,
+      title: 'TD corrigé SQL',
+      subject: 'Bases de données',
+      author: 'Amel K.',
+      rating: 4.5,
+      votes: 8,
+      downloads: 31,
+      favorite: true,
+      mine: false,
+    },
+    {
+      id: 3,
+      title: 'Fiche modèle OSI',
+      subject: 'Réseaux',
+      author: 'Hatem R.',
+      rating: 4.2,
+      votes: 5,
+      downloads: 22,
+      favorite: false,
+      mine: false,
+    },
+    {
+      id: 4,
+      title: 'Annales 2025',
+      subject: 'Mathématiques',
+      author: 'Équipe CampusFlow',
+      rating: 4.9,
+      votes: 20,
+      downloads: 120,
+      favorite: false,
+      mine: false,
+    },
   ];
 
   /** Simule un délai réseau pour pouvoir afficher l'état de chargement. */
@@ -34,13 +74,23 @@ export class ResourcesService {
   }
 
   getAll(): Observable<Resource[]> {
-    return this.reply(this.data.map((r) => ({ ...r })), 700);
+    return this.reply(
+      this.data.map((r) => ({ ...r })),
+      700,
+    );
   }
 
   create(title: string, subject: string): Observable<Resource> {
     const resource: Resource = {
-      id: this.nextId++, title, subject, author: 'Moi',
-      rating: 0, votes: 0, downloads: 0, favorite: false, mine: true,
+      id: this.nextId++,
+      title,
+      subject,
+      author: 'Moi',
+      rating: 0,
+      votes: 0,
+      downloads: 0,
+      favorite: false,
+      mine: true,
     };
     this.data = [resource, ...this.data];
     return this.reply({ ...resource });

@@ -21,15 +21,15 @@ export class AssistantService {
     },
     {
       keywords: ['sql', 'jointure', 'requête'],
-      text: "En SQL, une jointure combine des lignes de deux tables grâce à une clé commune (INNER JOIN, LEFT JOIN...). Je peux te proposer des exercices.",
+      text: 'En SQL, une jointure combine des lignes de deux tables grâce à une clé commune (INNER JOIN, LEFT JOIN...). Je peux te proposer des exercices.',
     },
     {
       keywords: ['arbre', 'arbres', 'binaire'],
-      text: "Un arbre binaire est une structure où chaque nœud a au plus deux fils. Les parcours classiques sont préfixe, infixe et suffixe.",
+      text: 'Un arbre binaire est une structure où chaque nœud a au plus deux fils. Les parcours classiques sont préfixe, infixe et suffixe.',
     },
     {
       keywords: ['quiz', 'test'],
-      text: "Bonne idée ! Dis-moi la matière et le chapitre, et je te prépare un quiz adapté à ton niveau.",
+      text: 'Bonne idée ! Dis-moi la matière et le chapitre, et je te prépare un quiz adapté à ton niveau.',
     },
     {
       keywords: ['plan', 'planning', 'révision', 'revision'],

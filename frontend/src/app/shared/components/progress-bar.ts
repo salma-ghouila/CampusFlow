@@ -20,9 +20,20 @@ import { Component, computed, input } from '@angular/core';
     </div>
   `,
   styles: `
-    .bar { height: 10px; background: #e5e7eb; border-radius: 999px; overflow: hidden; }
-    .bar.small { height: 6px; }
-    .fill { height: 100%; background: linear-gradient(90deg, #4f46e5, #818cf8); transition: width 0.3s; }
+    .bar {
+      height: 10px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar.small {
+      height: 6px;
+    }
+    .fill {
+      height: 100%;
+      background: linear-gradient(90deg, #4f46e5, #818cf8);
+      transition: width 0.3s;
+    }
   `,
 })
 export class ProgressBar {

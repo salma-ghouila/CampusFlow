@@ -28,7 +28,10 @@ export class GroupsService {
   }
 
   getAll(): Observable<Group[]> {
-    return this.reply(this.data.map((g) => ({ ...g })), 600);
+    return this.reply(
+      this.data.map((g) => ({ ...g })),
+      600,
+    );
   }
 
   create(name: string, subject: string): Observable<Group> {
@@ -40,9 +43,7 @@ export class GroupsService {
   /** Rejoint ou quitte un groupe. */
   toggleJoin(id: number): Observable<Group> {
     this.data = this.data.map((g) =>
-      g.id === id
-        ? { ...g, joined: !g.joined, members: g.members + (g.joined ? -1 : 1) }
-        : g,
+      g.id === id ? { ...g, joined: !g.joined, members: g.members + (g.joined ? -1 : 1) } : g,
     );
     return this.reply({ ...this.data.find((g) => g.id === id)! }, 150);
   }

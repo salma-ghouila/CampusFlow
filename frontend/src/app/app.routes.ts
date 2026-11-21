@@ -9,9 +9,16 @@ import { Shell } from './layout/shell';
  */
 export const routes: Routes = [
   // Zone publique
-  { path: '', pathMatch: 'full', loadComponent: () => import('./pages/landing/landing').then((m) => m.Landing) },
+  {
+    path: '',
+    pathMatch: 'full',
+    loadComponent: () => import('./pages/landing/landing').then((m) => m.Landing),
+  },
   { path: 'login', loadComponent: () => import('./pages/login/login').then((m) => m.Login) },
-  { path: 'register', loadComponent: () => import('./pages/register/register').then((m) => m.Register) },
+  {
+    path: 'register',
+    loadComponent: () => import('./pages/register/register').then((m) => m.Register),
+  },
 
   // Zone étudiant (connexion obligatoire)
   {
@@ -20,14 +27,35 @@ export const routes: Routes = [
     canActivate: [authGuard],
     children: [
       { path: 'dashboard', loadComponent: () => import('./pages/home/home').then((m) => m.Home) },
-      { path: 'subjects', loadComponent: () => import('./pages/subjects/subjects').then((m) => m.Subjects) },
-      { path: 'library', loadComponent: () => import('./pages/library/library').then((m) => m.Library) },
-      { path: 'planning', loadComponent: () => import('./pages/planning/planning').then((m) => m.Planning) },
-      { path: 'groups', loadComponent: () => import('./pages/groups/groups').then((m) => m.Groups) },
-      { path: 'progress', loadComponent: () => import('./pages/progress/progress').then((m) => m.Progress) },
-      { path: 'assistant', loadComponent: () => import('./pages/assistant/assistant').then((m) => m.Assistant) },
+      {
+        path: 'subjects',
+        loadComponent: () => import('./pages/subjects/subjects').then((m) => m.Subjects),
+      },
+      {
+        path: 'library',
+        loadComponent: () => import('./pages/library/library').then((m) => m.Library),
+      },
+      {
+        path: 'planning',
+        loadComponent: () => import('./pages/planning/planning').then((m) => m.Planning),
+      },
+      {
+        path: 'groups',
+        loadComponent: () => import('./pages/groups/groups').then((m) => m.Groups),
+      },
+      {
+        path: 'progress',
+        loadComponent: () => import('./pages/progress/progress').then((m) => m.Progress),
+      },
+      {
+        path: 'assistant',
+        loadComponent: () => import('./pages/assistant/assistant').then((m) => m.Assistant),
+      },
       { path: 'quiz', loadComponent: () => import('./pages/quiz/quiz').then((m) => m.Quiz) },
-      { path: 'profile', loadComponent: () => import('./pages/profile/profile').then((m) => m.Profile) },
+      {
+        path: 'profile',
+        loadComponent: () => import('./pages/profile/profile').then((m) => m.Profile),
+      },
       {
         path: 'admin',
         canActivate: [adminGuard],
@@ -37,5 +65,8 @@ export const routes: Routes = [
   },
 
   // Page introuvable
-  { path: '**', loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFound) },
+  {
+    path: '**',
+    loadComponent: () => import('./pages/not-found/not-found').then((m) => m.NotFound),
+  },
 ];

@@ -80,30 +80,121 @@ interface Level {
     }
   `,
   styles: `
-    .head h1 { margin: 0; }
-    .head p { color: #6b7280; margin: 0.3rem 0 1.4rem; }
-    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 1rem; margin-bottom: 1rem; }
-    .stat { background: #fff; padding: 1.1rem 1.2rem; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); display: flex; flex-direction: column; gap: 0.2rem; }
-    .stat small { color: #6b7280; }
-    .stat strong { font-size: 1.7rem; color: #4f46e5; }
-    .layout { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem; align-items: start; }
-    .panel { background: #fff; padding: 1.2rem; border-radius: 14px; box-shadow: 0 2px 10px rgba(0,0,0,0.06); }
-    .panel h2 { margin: 0 0 1rem; font-size: 1.1rem; }
-    .line { margin-bottom: 1rem; }
-    .line-head { display: flex; justify-content: space-between; margin-bottom: 0.35rem; }
-    .chapter { display: flex; gap: 0.7rem; align-items: center; padding: 0.55rem 0; border-top: 1px solid #f3f4f6; }
-    .chapter div { display: flex; flex-direction: column; }
-    .chapter small { color: #6b7280; }
-    .tag { padding: 0.2rem 0.6rem; border-radius: 999px; font-size: 0.78rem; font-weight: 700; white-space: nowrap; }
-    .tag.low { background: #fee2e2; color: #b91c1c; }
-    .tag.mid { background: #fef3c7; color: #b45309; }
-    .tag.high { background: #d1fae5; color: #047857; }
-    .skeleton { height: 90px; border-radius: 14px; background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%); background-size: 200% 100%; animation: shimmer 1.2s infinite; }
-    @keyframes shimmer { to { background-position: -200% 0; } }
-    .empty { background: #fff; border: 2px dashed #c7d2fe; border-radius: 16px; padding: 3rem 1rem; text-align: center; }
-    .empty-ico { font-size: 2.8rem; }
-    .empty p { color: #6b7280; margin: 0; }
-    .error { color: #dc2626; }
+    .head h1 {
+      margin: 0;
+    }
+    .head p {
+      color: #6b7280;
+      margin: 0.3rem 0 1.4rem;
+    }
+    .stats {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+    .stat {
+      background: #fff;
+      padding: 1.1rem 1.2rem;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+      display: flex;
+      flex-direction: column;
+      gap: 0.2rem;
+    }
+    .stat small {
+      color: #6b7280;
+    }
+    .stat strong {
+      font-size: 1.7rem;
+      color: #4f46e5;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1rem;
+      align-items: start;
+    }
+    .panel {
+      background: #fff;
+      padding: 1.2rem;
+      border-radius: 14px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.06);
+    }
+    .panel h2 {
+      margin: 0 0 1rem;
+      font-size: 1.1rem;
+    }
+    .line {
+      margin-bottom: 1rem;
+    }
+    .line-head {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0.35rem;
+    }
+    .chapter {
+      display: flex;
+      gap: 0.7rem;
+      align-items: center;
+      padding: 0.55rem 0;
+      border-top: 1px solid #f3f4f6;
+    }
+    .chapter div {
+      display: flex;
+      flex-direction: column;
+    }
+    .chapter small {
+      color: #6b7280;
+    }
+    .tag {
+      padding: 0.2rem 0.6rem;
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .tag.low {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+    .tag.mid {
+      background: #fef3c7;
+      color: #b45309;
+    }
+    .tag.high {
+      background: #d1fae5;
+      color: #047857;
+    }
+    .skeleton {
+      height: 90px;
+      border-radius: 14px;
+      background: linear-gradient(90deg, #e5e7eb 25%, #f3f4f6 50%, #e5e7eb 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.2s infinite;
+    }
+    @keyframes shimmer {
+      to {
+        background-position: -200% 0;
+      }
+    }
+    .empty {
+      background: #fff;
+      border: 2px dashed #c7d2fe;
+      border-radius: 16px;
+      padding: 3rem 1rem;
+      text-align: center;
+    }
+    .empty-ico {
+      font-size: 2.8rem;
+    }
+    .empty p {
+      color: #6b7280;
+      margin: 0;
+    }
+    .error {
+      color: #dc2626;
+    }
   `,
 })
 export class Progress {
@@ -119,10 +210,11 @@ export class Progress {
     this.subjects().reduce((sum, s) => sum + s.chapters.length, 0),
   );
 
-  readonly masteredCount = computed(() =>
-    this.subjects()
-      .flatMap((s) => s.chapters)
-      .filter((c) => (this.mastery()[c.id] ?? 0) >= 75).length,
+  readonly masteredCount = computed(
+    () =>
+      this.subjects()
+        .flatMap((s) => s.chapters)
+        .filter((c) => (this.mastery()[c.id] ?? 0) >= 75).length,
   );
 
   readonly globalAverage = computed(() => {
